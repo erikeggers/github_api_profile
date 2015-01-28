@@ -7,17 +7,27 @@
  --></head>
 <body>
 
-  <div class="data"></div>
+  <div class="sidebar-container"></div>
+  <div class="repo-container"></div>
+
 
   <script src="scripts/bower_components/jquery/dist/jquery.js"></script>
   <script src="scripts/bower_components/underscore/underscore.js"></script>
 
 
-  <script type="text/template" data-template-name="sidebar-items">
+  <script type="text/template" class="sidebar-items">
 
     <div class="container">
-      <img class="item-image" src="<%= image %>"/>
+      <img class="item-image" src="<%= avatar_url %>"/>
     </div>
+
+  </script>
+
+  <script type="text/template" class="repo-info">
+
+    <span>
+       <%= name %>
+    </span>
 
   </script>
   <script type="text/javascript" src="scripts/token.js"></script>

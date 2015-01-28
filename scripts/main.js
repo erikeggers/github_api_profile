@@ -1,17 +1,44 @@
 (function(){
   'use strict';
 
-  var $output = $('.data');
+$(document).ready(function() {
+
+  var $sidebarOutput = $('.sidebar-container');
+  var $repoOutput = $('.repo-container');
+  var gitHubT = "?access_token=" + token;
+
 
   var renderSidebarTemplate = _.template($('.sidebar-items').text());
+  var renderRepoTemplate = _.template($('.repo-info').text());
 
+  //sidebar
   $.ajax({
-    url: "https://api.github.com/users/erikeggers",
+    url: "https://api.github.com/users/erikeggers" + gitHubT,
     type: 'GET',
     dataType: 'json',
   }).done(function(userData) {
     console.log(userData);
-    console.log(renderSidebarTemplate(userData));
+    $sidebarOutput.append(renderSidebarTemplate(userData));
+  });
+
+  //repo
+  $.ajax({
+    url: "https://api.github.com/users/erikeggers/repos" + gitHubT,
+    type: 'GET',
+    dataType: 'json',
+  }).done(function(userData) {
+    console.log(userData);
+    _.each(userData, function(item) {
+      var data = {
+        name: item.name
+      };
+      console.log(data);
+      $repoOutput.append(renderRepoTemplate(data));
+    });
+    // $repoOutput.append(renderSidebarTemplate(userData));
+  });
+
+    // $output.append()
 
     // sign up for an api key
     // go to your settings
@@ -35,7 +62,5 @@
     // url: githubURL + "&access_token=" + githubToken
     // })
 
-
-  });
-
+ });
 })();
