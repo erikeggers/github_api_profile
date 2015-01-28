@@ -14,20 +14,40 @@
   <script src="scripts/bower_components/jquery/dist/jquery.js"></script>
   <script src="scripts/bower_components/underscore/underscore.js"></script>
 
-
+<!-- Sidebar container/template -->
   <script type="text/template" class="sidebar-items">
 
     <div class="container">
-      <img class="item-image" src="<%= avatar_url %>"/>
+      <a href ="<%= avatar_url %>">
+        <img class="item-image" src="<%= avatar_url %>"/>
+      </a>
+      <h2 class="users-name">
+        <%= name %>
+      </h2>
+      <span class="users-login">
+        <%= login %>
+      </span>
+      <ul>
+        <li class="users-location">
+          <%= location %>
+        </li>
+        <li class="users-email">
+          <%= email %>
+        </li>
+        <li class="created">
+          <%= created_at %>
+        </li>
+      </ul>
     </div>
 
   </script>
 
+<!-- Repo container/template -->
   <script type="text/template" class="repo-info">
 
-    <span>
-       <%= name %>
-    </span>
+    <ul>
+       <li><%= name %></li>
+    </ul>
 
   </script>
   <script type="text/javascript" src="scripts/token.js"></script>
