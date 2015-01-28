@@ -4,20 +4,25 @@
   <meta charset="UTF-8">
   <title>Github</title>
 <!--   <link rel="stylesheet" href="styles/main.css">
- --></head>
+ -->
+   <link rel="stylesheet" href="bower_components/octicons/octicons/octicons.css">
+</head>
 <body>
 
-  <div class="sidebar-container"></div>
+  <div class="sidebar-container">
+    <div class="user-info"></div>
+    <div class="orgs"></div>
+  </div>
   <div class="repo-container"></div>
 
 
-  <script src="scripts/bower_components/jquery/dist/jquery.js"></script>
-  <script src="scripts/bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
 
-<!-- Sidebar container/template -->
-  <script type="text/template" class="sidebar-items">
+<!-- User Items container/template -->
+  <script type="text/template" class="user-items">
 
-    <div class="container">
       <a href ="<%= avatar_url %>">
         <img class="item-image" src="<%= avatar_url %>"/>
       </a>
@@ -27,29 +32,49 @@
       <span class="users-login">
         <%= login %>
       </span>
-      <ul>
-        <li class="users-location">
-          <%= location %>
-        </li>
-        <li class="users-email">
-          <%= email %>
-        </li>
-        <li class="created">
-          <%= created_at %>
-        </li>
-      </ul>
-    </div>
-
+      <li class="users-location">
+        <%= location %>
+      </li>
+      <li class="users-email">
+        <%= email %>
+      </li>
+      <li class="created">
+        Joined On <%= moment(created_at).format('ll') %>
+      </li>
+      <div class="social">
+        <div class="following">
+          <%= following %>
+          <p>Following</p>
+        </div>
+        <div class="followers">
+          <%= followers %>
+          <p>Followers</p>
+        </div>
+        <div class="starred">
+          <span class="starred-count">0</span>
+          <p>Starred</p>
+        </div>
+      </div>
   </script>
+
+  <script type="text/template" class="user-orgs">
+    <a href="<%= url %>" class="orgs-url">
+      <img class="orgs-image" src="<%= avatar_url %>"/>
+    </a>
+  </script>
+
 
 <!-- Repo container/template -->
   <script type="text/template" class="repo-info">
-
-    <ul>
-       <li><%= name %></li>
-    </ul>
+    <a href="<%= html_url %>" class="repo-url"><%= name %></a>
+    <span class="lastUpdated"><%= moment(updated_at).fromNow() %></span>
+    <a href="<%= languages_url %>" class="language-url"><%= language %></a>
 
   </script>
+
+
+
+
   <script type="text/javascript" src="scripts/token.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
   </body>

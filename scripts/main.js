@@ -1,35 +1,44 @@
 (function(){
   'use strict';
 
+var baseUrl = "https://api.github.com/users/erikeggers";
+var gitHubT = "?access_token=" + token;
+
 $(document).ready(function() {
 
-  var $sidebarOutput = $('.sidebar-container');
+  var $userInfoOutput = $('.user-info');
+  var $orgsOutput = $('.orgs');
   var $repoOutput = $('.repo-container');
-  var gitHubT = "?access_token=" + token;
 
-
-  var renderSidebarTemplate = _.template($('.sidebar-items').text());
+  var renderUserTemplate = _.template($('.user-items').text());
+  var renderOrgsTemplate = _.template($('.user-orgs').text());
   var renderRepoTemplate = _.template($('.repo-info').text());
 
   //sidebar
-  $.ajax({
-    url: "https://api.github.com/users/erikeggers" + gitHubT
-  }).done(function(userData) {
-    // console.log(userData);
-    $sidebarOutput.append(renderSidebarTemplate(userData));
+  $.ajax( baseUrl + gitHubT).done(function(userData) {
+    console.log(userData);
+    $userInfoOutput.append(renderUserTemplate(userData));
+  });
+
+  //sidebar-starred
+  $.ajax(baseUrl + '/starred' + gitHubT).done(function(starredData) {
+    // console.log("starred: ", starredData);
+    $('.starred-count').text(starredData.length);
+  });
+
+  //sidebar-orgs
+  $.ajax(baseUrl + '/orgs' + gitHubT).done(function(userOrgs) {
+    // console.log(userOrgs);
+    _.each(userOrgs, function(item) {
+    $orgsOutput.append(renderOrgsTemplate(item));
+    });
   });
 
   //repo
-  $.ajax({
-    url: "https://api.github.com/users/erikeggers/repos" + gitHubT
-  }).done(function(userData) {
-    console.log(userData);
-    _.each(userData, function(item) {
-      var data = {
-        name: item.name
-      };
-      console.log(data);
-      $repoOutput.append(renderRepoTemplate(data));
+  $.ajax(baseUrl + '/repos' + gitHubT).done(function(userRepos) {
+    // console.log(userRepos);
+    _.each(userRepos, function(item) {
+      $repoOutput.append(renderRepoTemplate(item));
     });
   });
 
