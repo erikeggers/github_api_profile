@@ -16,19 +16,16 @@ $(document).ready(function() {
 
   //sidebar
   $.ajax( baseUrl + gitHubT).done(function(userData) {
-    console.log(userData);
     $userInfoOutput.append(renderUserTemplate(userData));
   });
 
   //sidebar-starred
   $.ajax(baseUrl + '/starred' + gitHubT).done(function(starredData) {
-    // console.log("starred: ", starredData);
     $('.starred-count').text(starredData.length);
   });
 
   //sidebar-orgs
   $.ajax(baseUrl + '/orgs' + gitHubT).done(function(userOrgs) {
-    // console.log(userOrgs);
     _.each(userOrgs, function(item) {
     $orgsOutput.append(renderOrgsTemplate(item));
     });
@@ -36,11 +33,9 @@ $(document).ready(function() {
 
   //repo
   $.ajax(baseUrl + '/repos' + gitHubT).done(function(userRepos) {
-    // console.log(userRepos);
     _.each(userRepos, function(item) {
       $repoOutput.append(renderRepoTemplate(item));
-    });
   });
-
+  });
  });
 })();
