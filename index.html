@@ -10,74 +10,93 @@
 <body>
   <header>
     <span class="mega-octicon octicon-mark-github"></span>
+    <span class="mega-octicon octicon-logo-github"></span>
   </header>
-  <div class="sidebar-container">
-    <div class="user-info"></div>
-    <div class="orgs"></div>
+  <div class="page-container">
+    <div class="sidebar-container">
+      <div class="user-info"></div>
+      <div class="orgs"></div>
+    </div>
+    <div class="repo-container"></div>
   </div>
-  <div class="repo-container"></div>
 
 
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/moment/moment.js"></script>
 
 <!-- User Items container/template -->
-  <script type="text/template" class="user-items">
+<script type="text/template" class="user-items">
 
-      <a href ="<%= avatar_url %>">
-        <img class="avatar-image" src="<%= avatar_url %>"/>
-      </a>
-      <h2 class="users-name">
-        <%= name %>
-      </h2>
-      <span class="users-login">
-        <%= login %>
-      </span>
-      <li class="users-location">
-        <%= location %>
-      </li>
-      <li class="users-email">
-        <%= email %>
-      </li>
-      <li class="created">
-        Joined On <%= moment(created_at).format('ll') %>
-      </li>
-      <div class="social">
-        <div class="following">
-          <%= following %>
-          <p>Following</p>
-        </div>
-        <div class="followers">
-          <%= followers %>
-          <p>Followers</p>
-        </div>
-        <div class="starred">
-          <span class="starred-count">0</span>
-          <p>Starred</p>
-        </div>
-      </div>
-  </script>
+  <a href ="<%= avatar_url %>">
+    <img class="avatar-image" src="<%= avatar_url %>"/>
+  </a>
+  <span class="users-name">
+    <%= name %>
+  </span>
+  <span class="users-login">
+    <%= login %>
+  </span>
+  <ul class="vcard-details">
+    <li class="vcard-detail">
+      <span class="octicon octicon-location"></span><%= location %>
+    </li>
+    <li class="vcard-detail">
+      <span class="octicon octicon-mail"></span><a href="mailto:<%= email %>"><%= email %></a>
+    </li>
+    <li class="vcard-detail">
+      <span class="octicon octicon-clock"></span>Joined On <%= moment(created_at).format('ll') %>
+    </li>
+  </ul>
 
-  <script type="text/template" class="user-orgs">
-    <a href="<%= url %>" class="orgs-url">
-      <img class="orgs-image" src="<%= avatar_url %>"/>
+  <div class="user-stats">
+    <a class="user-stat" href="#">
+      <strong class="user-stat-count"><%= followers %></strong>
+      <span class="stat-text">Followers</span>
     </a>
-  </script>
+    <a class="user-stat" href="#">
+      <strong class="user-stat-count starred-count">0</strong>
+      <span class="stat-text">Starred</span>
+    </a>
+    <a class="user-stat" href="#">
+      <strong class="user-stat-count"><%= following %></strong>
+      <span class="stat-text">Following</span>
+    </a>
+  </div>
+</script>
+
+<script type="text/template" class="user-orgs">
+  <span class=orgs-title>Organizations</span>
+  <a href="<%= url %>" class="orgs-url">
+    <img class="orgs-image" src="<%= avatar_url %>"/>
+  </a>
+</script>
 
 
 <!-- Repo container/template -->
-  <script type="text/template" class="repo-info">
-    <a href="<%= html_url %>" class="repo-url"><%= name %></a>
-    <span class="lastUpdated"><%= moment(updated_at).fromNow() %></span>
-    <a href="<%= languages_url %>" class="language-url"><%= language %></a>
+<script type="text/template" class="repo-info">
 
-  </script>
+  <ul class="repo-list">
+    <li class="repo-list-item repo-name-container">
+      <a href="<%= html_url %>" class="repo-url"><%= name %></a>
+    </li>
+    <li class="repo-list-item repo-stats">
+      <span class="language"><%= language %></span>
+      <a href="<%= stargazers_url %>"><span class="octicon octicon-star"></span><%= stargazers_count %></a>
+      <a href="<%= forks_url %>"><span class="octicon octicon-git-branch"></span><%= forks_count %></a>
+    </li>
 
 
+    <li class="repo-list-item">
+      <span class="last-updated">Updated <%= moment(updated_at).fromNow() %></span>
+    </li>
+  </ul>
+
+</script>
 
 
-  <script type="text/javascript" src="scripts/token.js"></script>
-  <script type="text/javascript" src="scripts/main.js"></script>
-  </body>
-  </html>
+<script type="text/javascript" src="scripts/token.js"></script>
+<script type="text/javascript" src="scripts/main.js"></script>
+</body>
+
+</html>
