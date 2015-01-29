@@ -34,15 +34,18 @@ header {
   height: 50px;
 }
 
-.logo {
+.mark-logo,
+.github-logo {
+  display: inline-block;
+}
+
+.mark-logo {
   margin-left: 267px;
   height: 50px;
 }
 
 .octicon-mark-github,
 .octicon-logo-github {
-  display: inline-block;
-  vertical-align: middle;
   color: #363636;
 }
 
